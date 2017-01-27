@@ -58,6 +58,8 @@ def assign_value(values, box, value):
         assignments.append(values.copy())
     return values
 
+
+
 def naked_twins(values):
     """Eliminate values using the naked twins strategy.
     Args:
@@ -66,9 +68,17 @@ def naked_twins(values):
     Returns:
         the values dictionary with the naked twins eliminated from peers.
     """
+    for unit in all_units:
+        # Find all instances of naked twins
+        pairs = [values[box] for box in unit if len(values[box]) == 2]  # Find all 2 characer values
+        twins = [pair for pair in set(pairs) if pairs.count(pair) == 2] # Find all twins
 
-    # Find all instances of naked twins
-    # Eliminate the naked twins as possibilities for their peers
+        # Eliminate the naked twins as possibilities for their peers
+        for twin in twins:
+            for box in unit:
+                if values[box] != twin:
+                    assign_value(values, box, values[box].replace(twin[0], '').replace(twin[1], ''))
+    return values
 
 def grid_values(grid):
     """
@@ -96,16 +106,6 @@ def display(values):
         print(''.join([values[r + str(c + 1)].center(widths[c]) + ('| ' if c in [2, 5] else '') for c in range(9)]))
         if r in ['C', 'F']:
             print(horizontal_line)
-
-def naked_twins(values):
-    for unit in all_units:
-        pairs = [values[box] for box in unit if len(values[box]) == 2]  # Find all 2 characer values
-        twins = [pair for pair in set(pairs) if pairs.count(pair) == 2] # Find all twins
-        for twin in twins:
-            for box in unit:
-                if values[box] != twin:
-                    assign_value(values, box, values[box].replace(twin[0], '').replace(twin[1], ''))
-    return values
 
 def eliminate(values):
     # Write a function that will take as an input, the sudoku in dictionary form,
