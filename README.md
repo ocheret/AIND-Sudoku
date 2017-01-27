@@ -3,11 +3,26 @@
 
 # Question 1 (Naked Twins)
 Q: How do we use constraint propagation to solve the naked twins problem?  
-A: *Student should provide answer here*
+A: The naked twins problem is a specialization of the more general
+naked tuples problem, which is what was implemented for this
+assignment. This represents the constraint that if N boxes in a unit
+share the same list of N possible values, then none of the other boxes
+in that unit can possibly take on any of the N possibilities. This is
+easily implemented in the function naked_tuples which identifies the
+tuples and eliminates the appropriate values from the rest of the
+unit. This represents another constraint similar to the 'only choice'
+and 'eliminate' strategies implemented previously.  This means that it
+can be applied along with the other constraint propagation strategies,
+during the iterative reduction step in 'reduce_puzzle'. This
+repeatedly applies the constraints until no more changes are observed.
 
 # Question 2 (Diagonal Sudoku)
 Q: How do we use constraint propagation to solve the diagonal sudoku problem?  
-A: *Student should provide answer here*
+A: The diagonal sudoku problem is a simple extension of the regular
+sudoku problem where two new units corresponding to the two diagonals
+are introduced. By adding these units to the complete list of units
+the code naturally applies all contraints to the new units. No other
+code needs to be modified to support this.
 
 ### Install
 
